@@ -20,7 +20,7 @@ To do that we'll use the first part of the stub which give us the information fo
             int allyBotAlive = in.nextInt(); // the amount of your bot which are still alive
             int totalEntities = in.nextInt(); // the amount of entities in the arena
 // }
-            Map<Integer, Integer> shieldMap = new HashMap<>();
+            Map<Integer, Integer> shieldMap = new HashMap<>(); // Create a new empty dictionnary 
             for (int i = 0; i < totalEntities; i++) {
                 int entId = in.nextInt(); // the unique gameEntity id, stay the same for the whole game
                 String entType = in.next(); // the gameEntity type in a string. It can be ALLY | ENEMY
