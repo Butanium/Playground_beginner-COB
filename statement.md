@@ -1,6 +1,6 @@
 # Welcome!
 
-This Java template lets you get started quickly with a simple one-page playground.
+In this playground I'll explain you how to extract data from the basic code of [clash of bots](https://www.codingame.com/contribute/view/6587dcc2e3a07bd4696c16a3e63238b4a184)
 
 ```java runnable
 // { autofold
