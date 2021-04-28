@@ -12,13 +12,13 @@ for each bot id we'll associate its shield.
 
 To do that we'll use the first loop of the stub which give us the information for each bot :
 ```java
-Map<Integer, Integer> shieldMap = new HashMap<>(); // Create a new empty dictionnary 
+Map<Integer, Integer> shieldDic = new HashMap<>(); // Create a new empty dictionnary 
 for (int i = 0; i < totalEntities; i++) {
     int entId = in.nextInt(); // the unique gameEntity id, stay the same for the whole game
     String entType = in.next(); 
     int health = in.nextInt(); 
     int shield = in.nextInt(); 
-    shieldMap.put(entId, shield); 
+    shieldDic.put(entId, shield); 
     String action = in.next(); 
     String targets = in.next(); 
 }
@@ -112,9 +112,9 @@ for (int i = 0; i < allyBotAlive; i++) {
 
 The whole code look like this in java : 
 ```java
-import java.util.*;
-import java.io.*;
-import java.math.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
 
 /**
  * Control your bots in order to destroy the enemy team !
@@ -126,15 +126,17 @@ class Player {
         int botPerPlayer = in.nextInt(); // the amount of bot you control
         // game loop
         while (true) {
-           Map<Integer, Integer> shieldMap = new HashMap<>(); // Create a new empty dictionnary 
+            int allyBotAlive = in.nextInt(); // the amount of your bot which are still alive
+            int totalEntities = in.nextInt(); // the amount of entities in the arena
+            Map<Integer, Integer> shieldDic = new HashMap<>(); // Create a new empty dictionnary
             for (int i = 0; i < totalEntities; i++) {
                 int entId = in.nextInt(); // the unique gameEntity id, stay the same for the whole game
                 String entType = in.next(); // the gameEntity type in a string. It can be ALLY | ENEMY
                 int health = in.nextInt(); // the approximate gameEntity health. Can be 0 | 25 | 50 | 75 | 100, 25 meaning that your life is >= 25% and < 50% of your max life
                 int shield = in.nextInt(); // the approximate gameEntity shield. Can be 0 | 1 | 25 | 50 | 75 | 100, 1 meaning that your shield is >= 1% and < 25% of your max shield and 0 that you have no more shield left
-                shieldMap.put(entId, shield); // store the shield value for the id
+                shieldDic.put(entId, shield); // store the shield value for the id
                 String action = in.next(); // action executed by the gameEntity last turn
-                String targets = in.next(); // list of the targets id targeted by the robot last turn ("id1;id2;id3...") if the gameEntity is a robot, else -1 (the target for IDLE is the robot itself) 
+                String targets = in.next(); // list of the targets id targeted by the robot last turn ("id1;id2;id3...") if the gameEntity is a robot, else -1 (the target for IDLE is the robot itself)
             }
             String ordersString = "";
             for (int i = 0; i < allyBotAlive; i++) {
@@ -155,7 +157,7 @@ class Player {
                     }
                 }
                 if (shieldDic.get(selfId) == 100 && accClosestEnDist == 3) { // Move to closest enemy if shield is not empty and this enemy is Out Of Range
-                    ordersString += selfId + " MOVE " + accClosestEnId + ";"; 
+                    ordersString += selfId + " MOVE " + accClosestEnId + ";";
                 } else { // else let's idle (you can also add no order to the ordersString and the game will make this bot idle)
                     ordersString += selfId + " IDLE;";
                 }
@@ -168,4 +170,4 @@ class Player {
 
 I hope this playground helped you to get into the game. The orders choosen above are not supposed to be relevant, they are just here to show you how to use the values we extracted from the game loop.
 
-Also you'll notice that we didn't extract all the values as health, last action and targets, it's up to you to figure if you need them or not (and if yes how to extract them)
+Also you'll notice that we didn't extract all the values as health, last action and targets, it's up to you to figure if you need them or not (and if yes how to extract them)...
