@@ -25,7 +25,7 @@ To do that we'll use the first part of the stub which give us the information fo
                 int health = in.nextInt(); // the approximate gameEntity health. Can be 0 | 25 | 50 | 75 | 100, 25 meaning that your life is >= 25% and < 50% of your max life
                 int shield = in.nextInt(); // the approximate gameEntity shield. Can be 0 | 1 | 25 | 50 | 75 | 100, 1 meaning that your shield is >= 1% and < 25% of your max shield and 0 that you have no more shield left
                 shieldMap.put(entId, shield);
-                  // { autofold
+// { autofold
                 String action = in.next(); // action executed by the gameEntity last turn
                 String targets = in.next(); // list of the targets id targeted by the robot last turn ("id1;id2;id3...") if the gameEntity is a robot, else -1 (the target for IDLE is the robot itself)
                 
