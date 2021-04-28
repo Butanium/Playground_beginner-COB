@@ -6,6 +6,8 @@ We'll try to build a basic AI which :
 1) flee if it has no more shield
 2) attack the closest enemy at short/medium dist
 3) move to the closest enemy
+
+
 ```java runnable
 // { autofold
 public class Main {
