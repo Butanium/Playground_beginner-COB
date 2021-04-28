@@ -170,7 +170,7 @@ class Player {
                     int healthComp = in.nextInt();
                     int totComp = in.nextInt();
                 }
-                if (shieldDic.get(selfId) == 100 && accClosestEnDist == 3) { // Move to closest enemy if shield is not empty and this enemy is Out Of Range
+                if (shieldDic.get(selfId) == 100 && accClosestEnDist == 3) { // Move to closest enemy if shield is full and this enemy is Out Of Range
                     ordersString += selfId + " MOVE " + accClosestEnId + ";";
                 } else { // else let's idle (you can also add no order to the ordersString and the game will make this bot idle)
                     ordersString += selfId + " IDLE;";
