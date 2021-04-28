@@ -8,7 +8,7 @@ We'll try to make our bots moving to the closest enemy if their shield is full (
 ## Get the shield of every bots
 
 In order to perform action based on the shield of our bot we'll need to build a [**dictionnary**](https://en.wikipedia.org/wiki/Associative_array) : 
-for each bot id we'll associate it its shield.
+for each bot id we'll associate its shield.
 
 To do that we'll use the first loop of the stub which give us the information for each bot :
 ```java
