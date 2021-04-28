@@ -2,40 +2,40 @@
 
 In this playground I'll explain you how to extract data from the basic code of [clash of bots](https://www.codingame.com/contribute/view/6587dcc2e3a07bd4696c16a3e63238b4a184)
 
-We'll try to build make our bots moving to the closest enemy if their shield is full (=100) and if the closest enemy is out of range.
+We'll try to make our bots moving to the closest enemy if their shield is full (=100) and if the closest enemy is out of range.
 
 
 ## Get the shield of every bots
 
-In order to perform action based on the shield of our bot we'll need to build a **dictionnary** : for each bot id we'll associate it its shield.
+In order to perform action based on the shield of our bot we'll need to build a [**dictionnary**](https://en.wikipedia.org/wiki/Associative_array) : 
+for each bot id we'll associate it its shield.
 
 To do that we'll use the first loop of the stub which give us the information for each bot :
 ```java
 Map<Integer, Integer> shieldMap = new HashMap<>(); // Create a new empty dictionnary 
 for (int i = 0; i < totalEntities; i++) {
     int entId = in.nextInt(); // the unique gameEntity id, stay the same for the whole game
-    String entType = in.next(); // the gameEntity type in a string. It can be ALLY | ENEMY
-    int health = in.nextInt(); // the approximate gameEntity health. Can be 0 | 25 | 50 | 75 | 100, 25 meaning that your life is >= 25% and < 50% of your max life
-    int shield = in.nextInt(); // the approximate gameEntity shield. Can be 0 | 1 | 25 | 50 | 75 | 100, 1 meaning that your shield is >= 1% and < 25% of your max shield and 0 that you have no more shield left
-    shieldMap.put(entId, shield); // store the shield value for the id
-
-    String action = in.next(); // action executed by the gameEntity last turn
-    String targets = in.next(); // list of the targets id targeted by the robot last turn ("id1;id2;id3...") if the gameEntity is a robot, else -1 (the target for IDLE is the robot itself) 
+    String entType = in.next(); 
+    int health = in.nextInt(); 
+    int shield = in.nextInt(); 
+    shieldMap.put(entId, shield); 
+    String action = in.next(); 
+    String targets = in.next(); 
 }
 ```
 Or in python we would do 
 ```python
 while True:
-    ally_bot_alive = int(input())  # the amount of your bot which are still alive
-    total_entities = int(input())  # the amount of entities in the arena
+    ally_bot_alive = int(input())  
+    total_entities = int(input())  
     shieldDic = {} # create en empty dic
     for i in range(total_entities):
         inputs = input().split()
         ent_id = int(inputs[0])  # the unique gameEntity id, stay the same for the whole game
-        ent_type = inputs[1]  # the gameEntity type in a string. It can be ALLY | ENEMY
-        health = int(inputs[2])  # the approximate gameEntity health. Can be 0 | 25 | 50 | 75 | 100, 25 meaning that your life is >= 25% and < 50% of your max life
-        shield = int(inputs[3])  # the approximate gameEntity shield. Can be 0 | 1 | 25 | 50 | 75 | 100, 1 meaning that your shield is >= 1% and < 25% of your max shield and 0 that you have no more shield left
-        shieldDic[ent_id] = shield # store the shield value for the id
+        ent_type = inputs[1] 
+        health = int(inputs[2])  
+        shield = int(inputs[3])  
+        shieldDic[ent_id] = shield  # store the shield value for the id
         ... 
 ```
 
@@ -55,10 +55,10 @@ for (int i = 0; i < allyBotAlive; i++) {
     for (int j = 0; j < totalEntities; j++) {
         int entId = in.nextInt(); // the unique gameEntity id
         String entType = in.next(); // the gameEntity type in a string. It can be SELF | ALLY | ENEMY
-        int distMe = in.nextInt(); // approximate distance between the target and the current bot. Can be 0 to 4 for short, medium, long and out of range
-        int distMeRank = in.nextInt(); // entities are sorted by ascending order based on their distance to the current bot
+        int distMe = in.nextInt(); 
+        int distMeRank = in.nextInt();
         if (entType == "SELF") { // the bot we want to control is giving its information => we can get its ID
-            selfId = entId  // will happen only once, for the first iteration
+            selfId = entId  // will happen only once, in the first iteration, so you could actually replace entType == "Self" by j == 0
         }
     }
     ordersString += selfId + " [ACTION] " + "[TARGET]" + ";"; // add your order to the string with all the orders
