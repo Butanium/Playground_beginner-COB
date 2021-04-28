@@ -19,9 +19,7 @@ for (int i = 0; i < totalEntities; i++) {
     int health = in.nextInt(); 
     int shield = in.nextInt(); 
     shieldDic.put(entId, shield); 
-    String action = in.next(); 
-    String targets = in.next(); 
-}
+    ...
 ```
 Or in python we would do 
 ```python
@@ -61,6 +59,9 @@ for (int i = 0; i < allyBotAlive; i++) {
         if (entType == "SELF") { // the bot we want to control is giving its information => we can get its ID
             selfId = entId  // will happen only once, in the first iteration, so you could actually replace entType == "Self" by j == 0
         }
+        int shieldComp = in.nextInt(); 
+        int healthComp = in.nextInt();
+        int totComp = in.nextInt();
     }
     ordersString += selfId + " [ACTION] " + "[TARGET]" + ";"; // add your order to the string with all the orders
 
@@ -100,6 +101,9 @@ for (int i = 0; i < allyBotAlive; i++) {
         if (entType.equals("SELF")) {
             selfId = entId; // will happen only once, for the first iteration
         }
+        int shieldComp = in.nextInt(); 
+        int healthComp = in.nextInt();
+        int totComp = in.nextInt();
     }
     if (shieldDic.get(selfId)>0 && accClosestEnDist == 3) { // Move to closest enemy if shield is not empty and this enemy is Out Of Range
         ordersString += selfId + " MOVE " + accClosestEnId + ";"; 
@@ -137,6 +141,13 @@ class Player {
                 shieldDic.put(entId, shield); // store the shield value for the id
                 String action = in.next(); // action executed by the gameEntity last turn
                 String targets = in.next(); // list of the targets id targeted by the robot last turn ("id1;id2;id3...") if the gameEntity is a robot, else -1 (the target for IDLE is the robot itself)
+                int distEn = in.nextInt(); // NOT USED IN THIS LEAGUE (it'll be a RANGE so an int between 0 and 3)
+                int borderDist = in.nextInt(); // NOT USED IN THIS LEAGUE (it'll be a RANGE)
+                int borderDistRank = in.nextInt(); // NOT USED IN THIS LEAGUE (a RANK)
+                int distEnRank = in.nextInt(); // NOT USED IN THIS LEAGUE (it'll be a RANK so an int between 0 and entityCount)
+                int healthRank = in.nextInt(); // NOT USED IN THIS LEAGUE (a RANK)
+                int shieldRank = in.nextInt(); // NOT USED IN THIS LEAGUE (a RANK)
+                int totalRank = in.nextInt(); // NOT USED IN THIS LEAGUE (a RANK)
             }
             String ordersString = "";
             for (int i = 0; i < allyBotAlive; i++) {
@@ -155,6 +166,9 @@ class Player {
                     if (entType.equals("SELF")) {
                         selfId = entId; // will happen only once, for the first iteration
                     }
+                    int shieldComp = in.nextInt(); 
+                    int healthComp = in.nextInt();
+                    int totComp = in.nextInt();
                 }
                 if (shieldDic.get(selfId) == 100 && accClosestEnDist == 3) { // Move to closest enemy if shield is not empty and this enemy is Out Of Range
                     ordersString += selfId + " MOVE " + accClosestEnId + ";";
