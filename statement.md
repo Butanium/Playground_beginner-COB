@@ -45,7 +45,8 @@ This we allow us to get the shield of a certain bot later.
 ## Sending order for each bot
 To decide which order to give to each bot the easier way is to use the second loop.
 
-So that you first need to create an empty String which will at the end contains your orders, and then fill it every iteration of the loop. So we initialize ``ordersString`` as an empty string
+So that you first need to create an empty String which will at the end contains your orders, and then fill it every iteration of the loop. 
+So we initialize ``ordersString`` as an empty string.
 
 Also, to write your order you need the id of the ally bot you want to control, so we introduce ``selfId``.
 ```java
@@ -77,7 +78,8 @@ To do that we'll just use "accumulators", as we would do to find the minimum of 
 - ``accClosestEnRank`` will store the rank of the potential closest enemy
 - ``accClosestEnDist`` will store the range of the potential closest enemy
 - ``accClosestEnId`` will store the id of the potential closest enemy
-Once the inner loop is finished, we are sure that all our accumaltors contain the information we want about the closest enemy. So we can decide which order we'll give
+
+Once the inner loop is finished, we are sure that all our accumulators contain the information we want about the closest enemy. So we can decide which order we'll give
 to this bot.
 
 ```java
