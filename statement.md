@@ -8,22 +8,6 @@ We'll try to build a basic AI which :
 3) move to the closest enemy
 
 
-```java
-// { autofold
-public class Main {
-
-public static void main(String[] args) {
-// }
-
-String message = "Hello World!";
-System.out.println(message);
-
-//{ autofold
-}
-
-}
-//}
-```
 ## Get the shield of every bots
 
 In order to perform action based on the shield of our bot we'll need to build a **dictionnary** : for each bot we'll associate it its shield.
