@@ -55,11 +55,11 @@ This we allow us to get the shield of a certain bot later.
 ## Sending order for each bot
 To decide which order to give to each bot the easier way is to use the second loop.
 
-So that you first need to create an empty String which will at the end contains your orders, and then fill it every iteration of the loop.
+So that you first need to create an empty String which will at the end contains your orders, and then fill it every iteration of the loop. So we create ``ordersString``
 
 Also, to write your order you need the id of the ally bot you want to control, so we introduce ``selfId``
 ```java
-String result = "";
+String ordersString = "";
 for (int i = 0; i < allyBotAlive; i++) {
     int selfId = 0;
     for (int j = 0; j < totalEntities; j++) {
@@ -71,7 +71,7 @@ for (int i = 0; i < allyBotAlive; i++) {
             selfId = entId
         }
     }
-    result += selfId + " [ACTION] " + "[TARGET]" + ";"; // 
+    ordersString += selfId + " [ACTION] " + "[TARGET]" + ";"; // add your order to t
 
 }
 ```
