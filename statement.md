@@ -15,9 +15,11 @@ In order to perform action based on the shield of our bot we'll need to build a 
 To do that we'll use the first part of the stub which give us the information for each bot :
 ```java runnable
         while (true) {
+// { autofold
             StringBuilder result = new StringBuilder();
             int allyBotAlive = in.nextInt(); // the amount of your bot which are still alive
             int totalEntities = in.nextInt(); // the amount of entities in the arena
+// }
             Map<Integer, Integer> shieldMap = new HashMap<>();
             for (int i = 0; i < totalEntities; i++) {
                 int entId = in.nextInt(); // the unique gameEntity id, stay the same for the whole game
