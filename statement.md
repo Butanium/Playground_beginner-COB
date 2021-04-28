@@ -13,7 +13,7 @@ We'll try to build a basic AI which :
 In order to perform action based on the shield of our bot we'll need to build a **dictionnary** : for each bot we'll associate it its shield.
 
 To do that we'll use the first part of the stub which give us the information for each bot :
-```java
+```java runnable
         while (true) {
             StringBuilder result = new StringBuilder();
             int allyBotAlive = in.nextInt(); // the amount of your bot which are still alive
