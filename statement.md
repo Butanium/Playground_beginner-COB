@@ -2,10 +2,7 @@
 
 In this playground I'll explain you how to extract data from the basic code of [clash of bots](https://www.codingame.com/contribute/view/6587dcc2e3a07bd4696c16a3e63238b4a184)
 
-We'll try to build a basic AI which :
-1) flee if it has no more shield
-2) attack the closest enemy at short/medium dist
-3) move to the closest enemy
+We'll try to build make our bots moving to the closest enemy if their shield is not empty (>0)
 
 
 ## Get the shield of every bots
@@ -61,34 +58,38 @@ for (int i = 0; i < allyBotAlive; i++) {
         int distMe = in.nextInt(); // approximate distance between the target and the current bot. Can be 0 to 4 for short, medium, long and out of range
         int distMeRank = in.nextInt(); // entities are sorted by ascending order based on their distance to the current bot
         if (entType == "SELF") { // the bot we want to control is giving its information => we can get its ID
-            selfId = entId
+            selfId = entId  // will happen only once, for the first iteration
         }
     }
-    ordersString += selfId + " [ACTION] " + "[TARGET]" + ";"; // add your order to t
+    ordersString += selfId + " [ACTION] " + "[TARGET]" + ";"; // add your order to the string with all the orders
 
 }
 ```
+After the inner loop we collected all the information relative to this bot. The easiest way to make an AI is to make each bot taking a decision based the information he gave you. 
+So we add to ``ordersString`` the new order.
 
 
-## Get the closest enemy of bot id and its distance from this bot
+## Get the closest enemy of an ally bot and its distance from this bot
 
 In order to code the simple behavior of one of our bot we need to know which enemy bot is the closest to it.
 
 To do that we'll just use "accumulators", as we would do to find the minimum of a list :
--  ``accClosestEnRank`` will store the rank of the potentiel closest enemy
+- ``accClosestEnRank`` will store the rank of the potential closest enemy
+- ``accClosestEnDist`` will store the range of the potential closest enemy
+- ``accClosestEnId`` will store the id of the potential closest enemy
+Once the inner loop is finished, we are sure that all our accumaltors contain the information we want about the closest enemy
 
 ```java
 String ordersString = "";
 for (int i = 0; i < allyBotAlive; i++) {
     int accClosestEnRank = totalEntities; // the max rank an enemy could have
-    int accClosestEnDist = 0;
-    int selfId = 0, accClosestEnId = 0;
+    int accClosestEnDist = 4, selfId = 0, accClosestEnId = 0;
     for (int j = 0; j < totalEntities; j++) {
         int entId = in.nextInt(); // the unique gameEntity id
         String entType = in.next(); // the gameEntity type in a string. It can be SELF | ALLY | ENEMY
         int distMe = in.nextInt(); // approximate distance between the target and the current bot. Can be 0 to 4 for short, medium, long and out of range
         int distMeRank = in.nextInt(); // entities are sorted by ascending order based on their distance to the current bot
-        if (entType.equals("ENEMY") && distMeRank < accClosestEnRank) { // if an enemy is closer than the last one I memorized
+        if (entType.equals("ENEMY") && distMeRank < accClosestEnRank) { // if an enemy is closer to me than the last one I memorized
             accClosestEnId = entId; // then change the closest enemy Id to this id
             accClosestEnRank = distMeRank; // update the best rank
             accClosestEnDist = distMe; // update the distance of the potential closest enemy
@@ -97,7 +98,9 @@ for (int i = 0; i < allyBotAlive; i++) {
             selfId = entId; // will happen only once, for the first iteration
         }
     }
-    ordersString += selfId + " [ACTION] " + "[TARGET]" + ";"; // add your order to the string which will contains all your orders
+    if (shieldDic.get(selfId)>0) {
+            ordersString += selfId; // add your order to the string which will contains all your orders
+    }
 }
 ```
 
