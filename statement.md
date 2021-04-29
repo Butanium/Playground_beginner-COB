@@ -166,9 +166,9 @@ class Player {
                     if (entType.equals("SELF")) {
                         selfId = entId; // will happen only once, for the first iteration
                     }
-                    int shieldComp = in.nextInt(); 
-                    int healthComp = in.nextInt();
-                    int totComp = in.nextInt();
+                    int shieldComp = in.nextInt(); // NOT USED IN THIS LEAGUE (a COMP so either  -1 | 0 | 1)
+                    int healthComp = in.nextInt(); // NOT USED IN THIS LEAGUE (a COMP)
+                    int totComp = in.nextInt(); // NOT USED IN THIS LEAGUE (a COMP)
                 }
                 if (shieldDic.get(selfId) == 100 && accClosestEnDist == 3) { // Move to closest enemy if shield is full and this enemy is Out Of Range
                     ordersString += selfId + " MOVE " + accClosestEnId + ";";
