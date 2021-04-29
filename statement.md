@@ -142,7 +142,7 @@ class Player {
                 int shield = in.nextInt(); // the approximate gameEntity shield. Can be 0 | 1 | 25 | 50 | 75 | 100, 1 meaning that your shield is >= 1% and < 25% of your max shield and 0 that you have no more shield left
                 
                 shieldDic.put(entId, shield); // store the shield value for the id
-                //{ autofold
+                // { autofold
                 String action = in.next(); // action executed by the gameEntity last turn
                 String targets = in.next(); // list of the targets id targeted by the robot last turn ("id1;id2;id3...") if the gameEntity is a robot, else -1 (the target for IDLE is the robot itself)
                 int distEn = in.nextInt(); // NOT USED IN THIS LEAGUE (it'll be a RANGE so an int between 0 and 3)
@@ -152,7 +152,7 @@ class Player {
                 int healthRank = in.nextInt(); // NOT USED IN THIS LEAGUE (a RANK)
                 int shieldRank = in.nextInt(); // NOT USED IN THIS LEAGUE (a RANK)
                 int totalRank = in.nextInt(); // NOT USED IN THIS LEAGUE (a RANK)
-                //}
+                // }
             }
             String ordersString = "";
             for (int i = 0; i < allyBotAlive; i++) {
@@ -174,11 +174,11 @@ class Player {
                     if (entType.equals("SELF")) {
                         selfId = entId; // will happen only once, for the first iteration
                     }
-                    //{ autofold
+                    // { autofold
                     int shieldComp = in.nextInt(); // NOT USED IN THIS LEAGUE (a COMP so either  -1 | 0 | 1)
                     int healthComp = in.nextInt(); // NOT USED IN THIS LEAGUE (a COMP)
                     int totComp = in.nextInt(); // NOT USED IN THIS LEAGUE (a COMP)
-                    //}
+                    // }
                 }
                 if (shieldDic.get(selfId) == 100 && accClosestEnDist == 3) { // Move to closest enemy if shield is full and this enemy is Out Of Range
                     ordersString += selfId + " MOVE " + accClosestEnId + ";";
