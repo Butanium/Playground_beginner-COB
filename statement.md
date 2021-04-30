@@ -128,6 +128,8 @@ class Player {
     public static void main(String args[]) {
         Scanner in = new Scanner(System.in);
         int botPerPlayer = in.nextInt(); // the amount of bot you control
+        int mapSize = in.nextInt(); // the map size in meters (just here in case the creator change the map size during the contest)
+
         // game loop
         while (true) {
             int allyBotAlive = in.nextInt(); // the amount of your bot which are still alive
@@ -140,30 +142,29 @@ class Player {
                 String entType = in.next(); // the gameEntity type in a string. It can be ALLY | ENEMY
                 int health = in.nextInt(); // the approximate gameEntity health. Can be 0 | 25 | 50 | 75 | 100, 25 meaning that your life is >= 25% and < 50% of your max life
                 int shield = in.nextInt(); // the approximate gameEntity shield. Can be 0 | 1 | 25 | 50 | 75 | 100, 1 meaning that your shield is >= 1% and < 25% of your max shield and 0 that you have no more shield left
-                
                 shieldDic.put(entId, shield); // store the shield value for the id
 // { autofold
                 String action = in.next(); // action executed by the gameEntity last turn
                 String targets = in.next(); // list of the targets id targeted by the robot last turn ("id1;id2;id3...") if the gameEntity is a robot, else -1 (the target for IDLE is the robot itself)
-                int distEn = in.nextInt(); // NOT USED IN THIS LEAGUE (it'll be a RANGE so an int between 0 and 3)
-                int borderDist = in.nextInt(); // NOT USED IN THIS LEAGUE (it'll be a RANGE)
-                int borderDistRank = in.nextInt(); // NOT USED IN THIS LEAGUE (a RANK)
-                int distEnRank = in.nextInt(); // NOT USED IN THIS LEAGUE (it'll be a RANK so an int between 0 and entityCount)
-                int healthRank = in.nextInt(); // NOT USED IN THIS LEAGUE (a RANK)
-                int shieldRank = in.nextInt(); // NOT USED IN THIS LEAGUE (a RANK)
-                int totalRank = in.nextInt(); // NOT USED IN THIS LEAGUE (a RANK)
+                int distEn = in.nextInt(); // /!\ALWAYS 0 FOR THE FIRST LEAGUE/!\ then, the RANGE from to the closest enemy (if the entity is an enemy it returns
+                int borderDist = in.nextInt(); // /!\ALWAYS 0 FOR THE FIRST LEAGUE/!\ approximate distance between the gameEntity and the closest border
+                int borderDistRank = in.nextInt(); // /!\ALWAYS 0 FOR THE FIRST 2 LEAGUES/!\ gameEntity are sorted in ascending order based on their distance to the closest border
+                int distEnRank = in.nextInt(); // /!\ALWAYS 0 FOR THE FIRST 2 LEAGUES/!\ entities are sorted by ascending order based on their distance to the closest enemy
+                int healthRank = in.nextInt(); // /!\ALWAYS 0 FOR THE FIRST 2 LEAGUES/!\ entities are sorted in ascendant order based on their amount of health, this is the rank of the current gameEntity in the sorted list
+                int shieldRank = in.nextInt(); // /!\ALWAYS 0 FOR THE FIRST 2 LEAGUES/!\ entities are sorted in ascendant order based on their amount of shield
+                int totalRank = in.nextInt(); // /!\ALWAYS 0 FOR THE FIRST 2 LEAGUES/!\ entities are sorted in ascendant order based on their amount of health + shield	
 // }
             }
+
             String ordersString = "";
             for (int i = 0; i < allyBotAlive; i++) {
-
                 int accClosestEnRank = totalEntities; // the max rank an enemy could have
                 int accClosestEnDist = 4, selfId = 0, accClosestEnId = 0;
 
                 for (int j = 0; j < totalEntities; j++) {
                     int entId = in.nextInt(); // the unique gameEntity id
                     String entType = in.next(); // the gameEntity type in a string. It can be SELF | ALLY | ENEMY
-                    int distMe = in.nextInt(); // approximate distance between the target and the current bot. Can be 0 to 4 for short, medium, long and out of range
+                    int distMe = in.nextInt(); // approximate distance between the target and the current bot. Can be 0 to 3 for short, medium, long and out of range
                     int distMeRank = in.nextInt(); // entities are sorted by ascending order based on their distance to the current bot
 
                     if (entType.equals("ENEMY") && distMeRank < accClosestEnRank) { // if an enemy is closer to me than the last one I memorized
@@ -175,17 +176,22 @@ class Player {
                         selfId = entId; // will happen only once, for the first iteration
                     }
 // { autofold
-                    int shieldComp = in.nextInt(); // NOT USED IN THIS LEAGUE (a COMP so either  -1 | 0 | 1)
-                    int healthComp = in.nextInt(); // NOT USED IN THIS LEAGUE (a COMP)
-                    int totComp = in.nextInt(); // NOT USED IN THIS LEAGUE (a COMP)
-// }
+                    int shieldComp = in.nextInt(); // /!\ALWAYS 0 FOR THE FIRST LEAGUE/!\ -1 if the gameEntity has more shield than the current bot, 0 if it's equal, 1 if your bot as more shield
+                    int healthComp = in.nextInt(); // /!\ALWAYS 0 FOR THE FIRST LEAGUE/!\ same as shieldComp but for the health
+                    int totComp = in.nextInt(); // /!\ALWAYS 0 FOR THE FIRST LEAGUE/!\ same as shieldComp but based on the sum of health+shield
+// }					
                 }
+
                 if (shieldDic.get(selfId) == 100 && accClosestEnDist == 3) { // Move to closest enemy if shield is full and this enemy is Out Of Range
                     ordersString += selfId + " MOVE " + accClosestEnId + ";";
                 } else { // else let's idle (you can also add no order to the ordersString and the game will make this bot idle)
                     ordersString += selfId + " IDLE;";
                 }
             }
+
+            // Write an answer using System.out.println()
+            // To debug: System.err.println("Debug messages...");
+
             System.out.println(ordersString);
         }
     }
