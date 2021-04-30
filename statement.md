@@ -142,6 +142,7 @@ class Player {
                 String entType = in.next(); // the gameEntity type in a string. It can be ALLY | ENEMY
                 int health = in.nextInt(); // the approximate gameEntity health. Can be 0 | 25 | 50 | 75 | 100, 25 meaning that your life is >= 25% and < 50% of your max life
                 int shield = in.nextInt(); // the approximate gameEntity shield. Can be 0 | 1 | 25 | 50 | 75 | 100, 1 meaning that your shield is >= 1% and < 25% of your max shield and 0 that you have no more shield left
+                
                 shieldDic.put(entId, shield); // store the shield value for the id
 // { autofold
                 String action = in.next(); // action executed by the gameEntity last turn
@@ -157,7 +158,9 @@ class Player {
             }
 
             String ordersString = "";
+
             for (int i = 0; i < allyBotAlive; i++) {
+                
                 int accClosestEnRank = totalEntities; // the max rank an enemy could have
                 int accClosestEnDist = 4, selfId = 0, accClosestEnId = 0;
 
